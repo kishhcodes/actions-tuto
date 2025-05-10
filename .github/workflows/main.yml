@@ -10,7 +10,7 @@ jobs:
                 uses: actions/checkout@v4.2.2 # Took from Marketplace
 
               - name: List repo files
-                uses: echo "Executing a Script, homie"
+                run: echo "Executing a Script, homie"
 
               - name: Executing Shell Script
-                uses: ./script.sh
+                run: ./script.sh
