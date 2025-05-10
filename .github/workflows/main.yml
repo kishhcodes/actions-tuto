@@ -9,12 +9,6 @@ jobs:
               - name: Checkout # This is step title 
                 uses: actions/checkout@v4.2.2 # Took from Marketplace
 
-              - name: Welcome message 
-                run: | # Use Pipe Operator to run multiple commands under a single step
-                    echo "My first GitActions"
-                    ls
-                    cat README.md
-
               - name: Install Cowsay
                 run: sudo apt-get install cowsay -y
 
