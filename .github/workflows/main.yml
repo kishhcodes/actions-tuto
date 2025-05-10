@@ -1,30 +1,16 @@
-name: My First Workflow
+name: Workflow for Scripts
 
 on: push
 
 jobs: 
-    first_job: 
+    script_job: 
           runs-on: ubuntu-latest #This is the RUNNER
           steps:
               - name: Checkout # This is step title 
                 uses: actions/checkout@v4.2.2 # Took from Marketplace
 
-              - name: Install Cowsay
-                run: sudo apt-get install cowsay -y
-
-              - name: Generate ASCII Artwork
-                run: cowsay -f dragon "Run for cover, I am a DRAGON... MEOW" >> dragon.txt
-
-              - name: Test if the File exists
-                run: grep -i "dragon" dragon.txt
-
-              - name: Read the File
-                run: cat dragon.txt
-
               - name: List repo files
-                run: ls -la
-            #  - name: list files
-            #    run: ls
-              
-            #  - name: Read files
-               # run: cat README.md
+                uses: echo "Executing a Script, homie"
+
+              - name: Executing Shell Script
+                uses: ./script.sh
