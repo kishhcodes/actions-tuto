@@ -4,19 +4,31 @@ on: push
 
 jobs: 
     first_job: 
-          runs-on: ubuntu-latest
+          runs-on: ubuntu-latest #This is the RUNNER
           steps:
-              - name: Checkout
-                uses: actions/checkout@v4.2.2
+              - name: Checkout # This is step title 
+                uses: actions/checkout@v4.2.2 # Took from Marketplace
 
-              - name: Welcome message
-                run: |
+              - name: Welcome message 
+                run: | # Use Pipe Operator to run multiple commands under a single step
                     echo "My first GitActions"
                     ls
                     cat README.md
 
+              - name: Install Cowsay
+                run: sudo apt-get install cowsay -y
+
               - name: Generate ASCII Artwork
                 run: cowsay -f dragon "Run for cover, I am a DRAGON... MEOW" >> dragon.txt
+
+              - name: Test if the File exists
+                run: grep -i "dragon" dragon.txt
+
+              - name: Read the File
+                run: cat dragon.txt
+
+              - name: List repo files
+                run: ls -la
             #  - name: list files
             #    run: ls
               
