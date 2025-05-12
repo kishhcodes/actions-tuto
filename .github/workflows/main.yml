@@ -1,18 +1,39 @@
-name: Workflow for Scripts
+name: Generate ASCII Artwork
 
 on: push
 
 jobs: 
-    script_job: 
+    build_job_1: 
           runs-on: ubuntu-latest #This is the RUNNER
           steps:
-              - name: Checkout # This is step title 
-                uses: actions/checkout@v4.2.2 # Took from Marketplace
+          - name: Install Cowsay Program
+            run: sudo apt-get install cowsay -y
 
-              - name: List repo files
-                run: echo "Executing a Script, homie"
+          - name: Execute Cowsay CMD
+            run: cowsay -f dragon "Run for Cover I'm DANGER, MEOOWWWW" >> dragon.txt
+          
+          - name: Sleep for 10 seconds
+            run: sleep 10
+    
+    test_job_2:
+          needs: build_job_1
+          runs-on: ubuntu-latest
+          steps: 
+           - name: Sleep for 10 seconds
+             run: sleep 10
+            
+           - name: Waking up
+             run: echo "I woke up"
 
-              - name: Executing Shell Script
-                run: |
-                    chmod +x script.sh 
-                    ./script.sh
+           - name: Test file exists
+             run: grep -i "dragon" dragon.txt
+    
+    deploy_job_3:
+           needs: [test_job_2]
+           runs-on: ubuntu-latest
+           steps: 
+            - name: Sleep for 5 seconds
+              run: sleep 5
+            
+            - name: Read File
+              run: cat dragon.txt
