@@ -1,0 +1,31 @@
+name: Demo
+
+on: push
+
+env:
+  FROM_WORKFLOW: "workflow-value"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    env:
+      FROM_JOB: "job-value"
+
+    steps:
+      - id: first
+        run: echo "result=success" >> $GITHUB_OUTPUT
+
+      - name: Print contexts
+        env:
+          FROM_STEP: "step-value"
+        run: |
+          echo "Repo: ${{ github.repository }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Branch: ${{ github.ref }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Workflow var: ${{ env.FROM_WORKFLOW }}"
+          echo "Job var: ${{ env.FROM_JOB }}"
+          echo "Step var: $FROM_STEP"
+          echo "Step output: ${{ steps.first.outputs.result }}"
+          echo "Runner OS: ${{ runner.os }}"
